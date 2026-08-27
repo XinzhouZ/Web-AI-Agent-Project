@@ -55,8 +55,9 @@ export default function App() {
             )
           }
         />
-        <Route path="/login" element={<Login onLogin={setUser} />} />
-        <Route path="/register" element={<Register onRegister={setUser} />} />
+        {/* 登录/注册成功（user 被设置）后自动进入工作台，否则停在表单页"无反应" */}
+        <Route path="/login" element={user ? <Navigate to="/" replace /> : <Login onLogin={setUser} />}/>
+        <Route path="/register" element={user ? <Navigate to="/" replace /> : <Register onRegister={setUser} />} />
         <Route
           path="/"
           element={
